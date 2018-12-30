@@ -18,7 +18,7 @@ namespace UnitTest
         public async Task Status_grain_harus_request_member()
         {
             var proxy = _cluster.GrainFactory.GetGrain<IHardwareGrain>(1);
-            await proxy.RequestMember();
+            await proxy.RequestMember(3);
             var status = proxy.GetStatus().Result;
             Assert.Equal(ShareStatus.RequestMember, status);
         }

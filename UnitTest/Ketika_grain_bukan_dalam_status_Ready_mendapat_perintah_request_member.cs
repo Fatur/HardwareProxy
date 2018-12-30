@@ -15,12 +15,12 @@ namespace UnitTest
         {
             _cluster = fixture.Cluster;
             _proxy = _cluster.GrainFactory.GetGrain<IHardwareGrain>(3);
-            _proxy.RequestMember().Wait();
+            _proxy.RequestMember(3).Wait();
         }
         [Fact]
         public async Task harus_keluar_error_operation_on_invalid_state()
         {
-            var exception = await Assert.ThrowsAsync<OperationOnInvalidStateException>(() => _proxy.RequestMember());
+            var exception = await Assert.ThrowsAsync<OperationOnInvalidStateException>(() => _proxy.RequestMember(3));
             Assert.Equal("Operasi tidak bisa dijalankan pada state RequestMember", exception.Message);
         }
     }

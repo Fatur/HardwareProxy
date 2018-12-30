@@ -26,12 +26,12 @@ namespace Grains
             return Task.FromResult(mShareStatus);
         }
 
-        public Task RequestMember()
+        public Task RequestMember(int timeOut)
         {
             if (mShareStatus != ShareStatus.Ready)
                 throw new OperationOnInvalidStateException(mShareStatus);
             mShareStatus = ShareStatus.RequestMember;
-            mTimer = this.RegisterTimer(x=>BackToReadyState(), this, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(1));
+            mTimer = this.RegisterTimer(_=>BackToReadyState(), this, TimeSpan.FromSeconds(timeOut), TimeSpan.FromSeconds(1));
             return Task.CompletedTask;
         }
 

@@ -14,7 +14,7 @@ namespace UnitTest
         {
             _cluster = fixture.Cluster;
             _proxy = _cluster.GrainFactory.GetGrain<IHardwareGrain>(5);
-            _proxy.RequestMember().Wait();
+            _proxy.RequestMember(3).Wait();
 
             _proxy.SendMember(new Member { MemberNo = "7898", Name = "Mabuk RR" }).Wait();
         }

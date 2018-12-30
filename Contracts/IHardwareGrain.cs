@@ -9,7 +9,7 @@ namespace Contracts
     public interface IHardwareGrain : IGrainWithIntegerKey
     {
         Task<ShareStatus> GetStatus();
-        Task RequestMember();
+        Task RequestMember(int timeout);
         Task SendMember(Member member);
         Task<Member> GetMember();
     }
